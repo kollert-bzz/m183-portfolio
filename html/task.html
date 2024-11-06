@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} | Timo Koller</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<header>
+    <a href="/">
+        <img src="{{ url_for('static', filename='img/black_house.png') }}" alt="Home"/>
+    </a>
+    <h1 class="head-title">{{ title }}</h1>
+</header>
+<body>
+<pre>{{ result }}</pre>
+</body>
+</html>
