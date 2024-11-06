@@ -1,5 +1,4 @@
 import math
-from cmath import sqrt
 from flask import Flask, render_template
 
 app = Flask(__name__, template_folder='html')
@@ -19,20 +18,130 @@ def pure_function():
 
 @app.route('/A1F', methods=['GET'])
 def immutable_example():
-    my_tuple = (1, 2, 3)
-    return {'tuple': my_tuple}
+    student_info = [
+        ('Alice', 20, 1),
+        ('Bob', 22, 2),
+        ('Charlie', 19, 3)
+    ]
+    result = "Studenten Informationen:\n"
+    for student in student_info:
+        name, age, student_id = student
+        result += f"Name: {name}, Alter: {age}, ID: {student_id}\n"
+
+    return render_template('task.html', title="A1F", result=result)
+
+
+import math
+from cmath import sqrt
+from flask import Flask, render_template
+
+app = Flask(__name__, template_folder='html')
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/A1G', methods=['GET'])
+def pure_function():
+    def calculate_area(radius):
+        return math.pi * radius * radius
+    area = calculate_area(3)
+    return render_template('task.html', title="A1G", result=f'Bei einem Kreis mit einem Radius von: '
+                                                            f'{round(math.sqrt(area/math.pi), 2)},'
+                                                            f'\ngibt es eine Fläche von: {round(area, 2)}')
+
+@app.route('/A1F', methods=['GET'])
+def immutable_example():
+    student_info = [
+        ('Alice', 20, 1),
+        ('Bob', 22, 2),
+        ('Charlie', 19, 3)
+    ]
+    result = "Studenten Informationen:\n"
+    for student in student_info:
+        name, age, student_id = student
+        result += f"Name: {name}, Alter: {age}, ID: {student_id}\n"
+
+    return render_template('task.html', title="A1F", result=result)
+
 
 @app.route('/A1E', methods=['GET'])
 def compare_concepts():
-    return {
-        'OO': 'Objektorientierte Programmierung',
-        'Functional': 'Funktionale Programmierung',
-        'Procedural': 'Prozedurale Programmierung'
-    }
+    # Objektorientierte Programmierung (OO)
+    def oo_factorial(number):
+        class FactorialCalculator:
+            def __init__(self, number):
+                self.number = number
+
+            def calculate(self):
+                result = 1
+                for i in range(1, self.number + 1):
+                    result *= i
+                return result
+        calculator = FactorialCalculator(number)
+        return calculator.calculate()
+
+    # Prozedurale Programmierung
+    def procedural_factorial(number):
+        result = 1
+        for i in range(1, number + 1):
+            result *= i
+        return result
+
+    # Funktionale Programmierung
+    def functional_factorial(number):
+        return 1 if number == 0 else number * functional_factorial(number - 1)
+
+    # Berechnungen mit den jeweiligen Funktionen
+    oo_result = oo_factorial(5)  # Beispiel: 5! = 120
+    procedural_result = procedural_factorial(5)  # Beispiel: 5! = 120
+    functional_result = functional_factorial(5)  # Beispiel: 5! = 120
+
+    # Erklärungen und Unterschiede im Return
+    result = f'''
+    def oo_factorial(number):
+        class FactorialCalculator:
+            def __init__(self, number):
+                self.number = number
+
+            def calculate(self):
+                result = 1
+                for i in range(1, self.number + 1):
+                    result *= i
+                return result
+
+
+    def procedural_factorial(number):
+        result = 1
+        for i in range(1, number + 1):
+            result *= i
+        return result
+
+
+    def functional_factorial(number):
+        return 1 if number == 0 else number * functional_factorial(number - 1)
+        
+        
+    Ergebnis: {functional_result}
+    '''
+
+    return render_template('task.html', title="A1E - Fibonacci Algorithmus", result=result)
+
 
 @app.route('/B1G', methods=['GET'])
-def algorithm_explanation():
-    return {'explanation': 'Ein Algorithmus zur Berechnung der Fibonacci-Zahlen.'}
+def fibonacci_algorithm():
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        else:
+            return fibonacci(n - 1) + fibonacci(n - 2)
+
+    n = 5
+    fibonacci_result = fibonacci(n)
+    result = f"Das {n}. Fibonacci-Zahl ist: {fibonacci_result}"
+
+    return render_template('task.html', title="B1G - Fibonacci Algorithmus", result=result)
+
 
 @app.route('/B1F', methods=['GET'])
 def split_algorithm():

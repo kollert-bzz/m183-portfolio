@@ -1,11 +1,15 @@
 .head-title {
     position: absolute;
+    font-size: 50px;
+    color: orangered;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 45px;
-    color: orangered;
-    text-shadow: 0 5px 8px black, 0 -5px 8px black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+     border-bottom: 3px solid black;
 }
+
 
 .container {
     display: grid;
@@ -30,13 +34,19 @@
     background: orangered;
 }
 
-.container a:hover{
+.container a:hover {
     font-weight: bolder;
 }
 
-a img {
+header a img {
     width: 100px;
     height: auto;
+}
+
+header a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 header {
@@ -46,4 +56,17 @@ header {
     width: 100%;
     box-sizing: border-box;
     position: relative;
+}
+
+.result {
+    font-size: 20px;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.result-container{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
